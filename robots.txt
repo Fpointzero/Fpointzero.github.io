@@ -2,12 +2,8 @@
 User-agent: *
 
 # 不允许访问的内容
-Disallow: /img/
 Disallow: /css/
 Disallow: /js/
-Disallow: /picture/
-Disallow: /*.css
-Disallow: /*.js
 
 Sitemap: https://fpointzero.github.io/sitemap.xml
 Sitemap: https://fpointzero.github.io/baidusitemap.xml
