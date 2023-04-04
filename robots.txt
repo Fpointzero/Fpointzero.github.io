@@ -9,5 +9,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: http://liyaolife.com/sitemap.xml
-Sitemap: http://liyaolife.com/baidusitemap.xml
+Sitemap: https://fpointzero.github.io/sitemap.xml
+Sitemap: https://fpointzero.github.io/baidusitemap.xml
