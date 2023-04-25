@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>关于sql的一些理解</title>
+      <link href="/2023/04/25/%E5%85%B3%E4%BA%8Esql%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
+      <url>/2023/04/25/%E5%85%B3%E4%BA%8Esql%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="sql注入那些事"><a href="#sql注入那些事" class="headerlink" title="sql注入那些事"></a>sql注入那些事</h2><p>关于为什么 select * from user where ‘a1’ = ‘e1’ = ‘1’; 和 select * from user where ‘1’=’a1’ = ‘e1’;查询出来sql的值不一样</p><p><img src="https://gitee.com/fpointzero/imgforit/raw/master/img/image-20230425230152933.png" alt="image-20230425230152933"></p><blockquote><p>首先这里说一点，sql字符串具有跟php字符串类似的性质，比如说，如果是以非数字开头的</p><p>例如: <code>&#39;qdadada&#39; &#39;adad&#39;</code> 这些字符串的逻辑值为<code>0</code></p><p>如果是以数字开头的</p><p>例如: <code>&#39;1aaaa&#39; &#39;2bbb&#39;</code> 这些字符串的逻辑值为<code>1</code></p></blockquote><h3 id="39-a1-39-39-e1-39-39-1-39-和-39-1-39-39-a1-39-39-e1-39-的区别"><a href="#39-a1-39-39-e1-39-39-1-39-和-39-1-39-39-a1-39-39-e1-39-的区别" class="headerlink" title="&#39;a1&#39; = &#39;e1&#39; = &#39;1&#39; 和 &#39;1&#39; = &#39;a1&#39;= &#39;e1&#39;的区别"></a><code>&#39;a1&#39; = &#39;e1&#39; = &#39;1&#39;</code> 和<code> &#39;1&#39; = &#39;a1&#39;= &#39;e1&#39;</code>的区别</h3><ul><li>执行顺序不同，造成执行结果截然不同。</li></ul><h4 id="39-a1-39-39-e1-39-39-1-39"><a href="#39-a1-39-39-e1-39-39-1-39" class="headerlink" title="&#39;a1&#39;= &#39;e1&#39; = &#39;1&#39;"></a><code>&#39;a1&#39;= &#39;e1&#39; = &#39;1&#39;</code></h4><ol><li>首先 <code>&#39;a1&#39; = &#39;e1&#39;</code>因为是字符串比较，所以返回false</li><li>表达式就变成了 <code>false = &#39;1&#39;</code> </li><li><code>&#39;1&#39;</code>的逻辑值为 1</li></ol><p>所以<code>false = &#39;1&#39;</code>返回了false</p><h4 id="39-1-39-39-a1-39-39-e1-39"><a href="#39-1-39-39-a1-39-39-e1-39" class="headerlink" title="&#39;1&#39; = &#39;a1&#39;= &#39;e1&#39;"></a><code>&#39;1&#39; = &#39;a1&#39;= &#39;e1&#39;</code></h4><ol><li>首先 <code>&#39;1&#39; = &#39;e1&#39;</code>是字符串比较 返回 fasle</li><li>所以表达式变成了 <code>false = &#39;e1&#39;</code></li><li><code>&#39;e1&#39;</code>的逻辑值为0</li></ol><p>所以最终为 false = ‘e1’ 返回了true</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 知识学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> sql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>红明谷杯-web-wp</title>
       <link href="/2023/04/20/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF-web-wp/"/>
       <url>/2023/04/20/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF-web-wp/</url>
